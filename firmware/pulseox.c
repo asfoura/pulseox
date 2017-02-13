@@ -163,7 +163,7 @@ static void rtc_setup(void)
 	rtc_unlock();
 	RTC_ISR |=RTC_ISR_INIT;
 	while ((RTC_ISR & RTC_ISR_INITF) != RTC_ISR_INITF)__asm__("nop");
-	rtc_set_prescaler(127, 212);
+	rtc_set_prescaler(127, 212); //Divider for the processor
 	RTC_ISR &= ~(RTC_ISR_INIT);
 	PWR_CR &= ~PWR_CR_PDDS;
 	PWR_CR &= ~PWR_CR_LPDS;
@@ -383,7 +383,7 @@ int main(void)
 		for (i = 400; i ; --i) {   /* Wait a bit. */
 			__asm__("nop");
 		}
-		GPIOA_BSRR = GPIO2|GPIO3; 
+		GPIOA_BSRR = GPIO2|GPIO3; //powering  the LEDs
 		for (i = 150; i; --i) {   
 			__asm__("nop");
 		}
@@ -396,7 +396,7 @@ int main(void)
 			__asm__("nop");
 		}
 		
-		GPIOA_BSRR = (GPIO2|GPIO3)<<16;
+		GPIOA_BSRR = (GPIO2|GPIO3)<<16; //LEDs OFF
 		for (i = 300; i; --i) {   
 			__asm__("nop");
 		}
